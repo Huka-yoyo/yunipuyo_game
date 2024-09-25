@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com;
+style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <meta content="ユニフォームを球団別に積んで消す、球団ユニパズルゲーム！" name="description">
+  <meta property="og:title" content="ゆにぷよ">
+  <meta property="og:description" content="ユニフォームを球団別に積んで消す、球団ユニパズルゲーム！">
+  <meta property="og:type" content="game">
+  <meta property="og:site_name" content="まるっと球団">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:image" content="https://yuni-kyuudann.com/img/ogp.jpg">
+  <meta property="og:url" content="https://yuni-kyuudann.com">
+<meta name="twitter:card" content="summary_large_image">
+  </head><body style="margin:0;"><pagemap>
+    <dataobject type="thumbnail">
+      <attribute name="src" value="https://yuni-kyuudann.com/img/thumbnail.jpg">
+      <attribute name="width" value="200">
+      <attribute name="height" value="200">
+    </attribute></attribute></attribute></dataobject>
+    <title>ゆにぷよ</title>
+    <script src="src/config.js"></script>
+    <script src="src/stage.js"></script>
+    <script src="src/score.js"></script>
+    <script src="src/puyoimage.js"></script>
+    <script src="src/player.js"></script>
+    <script src="src/game.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+      window.addEventListener('load', (e) => {
+        document.getElementById('loader').style.display = "none";
+      })
+    </script>
+
+
+  <div id="contents" style="margin: auto; bottom: 0px; width: 51px; height: 87.4286px;" class="horizontal-center">
+    <img src="img/left.png" style="top: 5%;left: 1%;height: 78%;width: auto;">
+    <img src="img/bottom.png" style="top: 85%;left: 2%;height: auto;width: 96%;">
+    <img src="img/right.png" style="top: 30%;left: 67%;height: 53%;width: auto;">
+    <div id="stage" style=" overflow: hidden; width: 60%; height:80%; top:5%; left:12%;">
+      <div id="cover" style="display:none; width: 100%; height: 100%; z-index: 10;position: relative;">
+        <div id="easySelector" style="display:none;top:15%;height: 12%;width:45%;background-image: url(img/flame_hringopuyo.png);background-size: contain;" class="horizontal-center">
+          <img src="img/easy.png" style="height: 30%;" class="center">
+        </div>
+        <div id="normalSelector" style="display:none;top:40%;height: 12%;width:45%;background-image: url(img/flame_hringopuyo.png);background-size: contain;" class="horizontal-center">
+          <img src="img/hutuu.png" style="height: 30%;" class="center">
+        </div>
+        <div id="hardSelector" style="display:none;top:65%;height: 12%;width:45%;background-image: url(img/flame_hringopuyo.png);background-size: contain;" class="horizontal-center">
+          <img src="img/muzui.png" style="height: 30%;" class="center">
+        </div>
+      </div>
+      <div id="coverColor" style="display: block; width: 100%; height: 100%; z-index: 10; position: relative;">
+        <img src="img/dochirano.png" style="top:18%;height: 2.6%;" class="horizontal-center">
+        <img src="img/seri-gu.jpg" id="redSelector" style="top:30%;height: 22%;" class="horizontal-center">
+        <img src="img/pari-gu.jpg" id="blueSelector" style="top:63%;height: 22%;" class="horizontal-center">
+      </div>
+    </div>
+    <img style="height:2%; top:7%;" src="img/tugino.png" class="rightcolumn-center">
+    <div id="nextPuyo" style=" height: 16%;  width: 16%; top:10%;background-image: url(img/nextapple_puyo.png);display: flex;" class="rightcolumn-center"></div>
+
+    <div id="difficulty"></div>
+
+    <img src="img/partition.png" style="top: 51%; width: 15%;" class="rightcolumn-center">
+    <img style="top: 54%;height: 1.8%;" class="rightcolumn-center" src="img/totamisu.png">
+    <div id="scoreNum" style="width: 30%;top: 56%;height: 7%;font-size: 4vh" class="rightcolumn-center text-center"><img src="img/0.png" id="num_0" class="num"></div>
+    <div id="scoreUnit"></div>
+
+    <img src="img/partition.png" style="top: 69%; width: 15%;" class="rightcolumn-center">
+    <img src="img/renzoku.png" style="top: 72%;height: 1.8%;" class="rightcolumn-center">
+    <div id="maxRensaNum" style="top: 75%;height: 7%;" class="rightcolumn-center text-center"><img src="img/0.png" id="num_0" class="num"></div>
+
+    <div id="rotate" style="height: 15%;left: 85%;width: 15%;z-index: 1;" class="bottomcolumn-center"></div>
+    <img src="img/rotation.png" style="height:8%;left:85%;" class="bottomcolumn-center-reverse"> 
+    <div id="rotateRight" style="display: none;height: 15%;left: 90%;width: 15%;z-index: 1;" class="bottomcolumn-center"></div>
+    <img src="img/rotation.png" style="display: none;height:8%;left:90%;" class="bottomcolumn-center"> 
+    <div id="left" style="height: 15%;left: 10%;width: 15%;z-index: 1;" class="bottomcolumn-center"></div>
+    <img src="img/le.png" style="height:8%;left:10%;" class="bottomcolumn-center">
+    <div id="down" style="height: 15%;left: 30%;width: 10%;z-index: 1;" class="bottomcolumn-center"></div>
+    <img src="img/below.png" style="height:4.5%;left:30%;" class="bottomcolumn-center">
+    <div id="right" style="height: 15%;left: 50%;width: 15%;z-index: 1;" class="bottomcolumn-center"></div>
+    <img src="img/righ.png" style="height:8%;left:50%;" class="bottomcolumn-center"> 
+
+    <div id="gameover" style="display: none;width: 65%; height: 17%;background-color: black;" class="center rotate">
+      <img src="img/gameover_whiteringopuyo.png" style="top: 25%; left:50%; width: 60%;" class="translate-center">
+      <img id="restart" src="img/tsudukeru_whiteringopuyo.png" style="top: 75%; left:30%; width: 35%;" class="translate-center">
+      <a id="tweet" href="" rel="nofollow" target="_blank">
+        <img src="img/tsubuyaku_whiteringopuyo.png" style="top: 75%; left:70%; width: 35%;" class="translate-center">
+      </a>
+    </div>
+
+    <div style="display:none">
+        <img src="img/1chuni.png" id="puyo_1">
+        <img src="img/1carp.png" id="puyo_2">
+        <img src="img/1bei.png" id="puyo_3">
+        <img src="img/1yaku.png" id="puyo_4">
+        <img src="img/2chuni.png" id="puyo_5">
+        <img src="img/2carp.png" id="puyo_6">
+        <img src="img/2bei.png" id="puyo_7">
+        <img src="img/2yaku.png" id="puyo_8">
+        <img src="img/1hawks.png" id="puyo_b_1">
+        <img src="img/1hamu.png" id="puyo_b_2">
+        <img src="img/1ori.png" id="puyo_b_3">
+        <img src="img/1raku.png" id="puyo_b_4">
+        <img src="img/2hawks.png" id="puyo_b_5">
+        <img src="img/2hamu.png" id="puyo_b_6">
+        <img src="img/2ori.png" id="puyo_b_7">
+        <img src="img/2raku.png" id="puyo_b_8">
+        <img src="img/0.png" id="num_0" class="num">
+        <img src="img/1.png" id="num_1" class="num" style="margin-right: 5px;">
+        <img src="img/2.png" id="num_2" class="num">
+        <img src="img/3.png" id="num_3" class="num">
+        <img src="img/4.png" id="num_4" class="num">
+        <img src="img/5.png" id="num_5" class="num">
+        <img src="img/6.png" id="num_6" class="num">
+        <img src="img/7.png" id="num_7" class="num">
+        <img src="img/8.png" id="num_8" class="num">
+        <img src="img/9.png" id="num_9" class="num">
+        <img src="img/dot.png" id="dot" class="num">
+      </div>
+    </div>
+  
+  
+  </body>
+  </html>
